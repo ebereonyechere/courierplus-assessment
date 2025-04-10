@@ -19,7 +19,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'is_admin' => 1,
-            'approved_at' => now()
         ]);
     }
 }

@@ -10,7 +10,6 @@ test('tenants can create new posts', function () {
     $user = createApprovedTestUser();
 
     $data = [
-        'user_id' => $user->id,
         'title' => 'test title',
         'content' => 'test content'
     ];
