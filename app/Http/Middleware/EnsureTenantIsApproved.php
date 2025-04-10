@@ -15,7 +15,7 @@ class EnsureTenantIsApproved
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->approved_at) {
+        if ($request->user()->approved_at || $request->user()->isAdmin()) {
             return $next($request);
         }
 

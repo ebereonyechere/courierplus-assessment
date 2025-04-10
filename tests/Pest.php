@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -12,7 +14,7 @@
 */
 
 pest()->extend(Tests\TestCase::class)
- // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
 
 /*
@@ -41,7 +43,9 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function createApprovedTestUser()
 {
-    // ..
+    return User::factory()->create([
+        'approved_at' => now()
+    ]);
 }
