@@ -15,7 +15,6 @@
             <input type="text" class="border-2 border-gray-600 rounded p-2 w-full mb-4" value="{{ $token }}"
                 readonly>
         @else
-            <h3>Token: JK***********</h3>
             @if (count(auth()->user()->tokens))
                 <p class="mb-3 mt-1">Click the button to regenerate your token</p>
             @else

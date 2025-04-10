@@ -38,5 +38,7 @@ Route::middleware(['auth', EnsureTenantIsApproved::class])->group(function () {
 
     Route::resource('posts', PostController::class);
     Route::get('/', [PostController::class, 'index']);
-    Route::view('pending-approval', 'auth.pending')->name('pending');
 });
+Route::middleware(EnsureTenantIsNotApproved::class)->get('pending-approval', function () {
+    return view('auth.pending');
+})->name('pending');
