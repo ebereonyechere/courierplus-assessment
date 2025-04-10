@@ -11,7 +11,7 @@ class ApiTokenController extends Controller
      */
     public function index()
     {
-        return view('tokens.index');
+        return view('tokens.index', ['token' => null]);
     }
 
 
@@ -20,8 +20,9 @@ class ApiTokenController extends Controller
      */
     public function store(Request $request)
     {
-        $request->user()->createToken("Api Token");
+        $request->user()->tokens()->delete();
+        $token = $request->user()->createToken("Api Token");
 
-        return redirect()->back();
+        return view('tokens.index', ['token' => $token->plainTextToken]);
     }
 }

@@ -40,6 +40,9 @@
         <div class="mb-5">
             <button type="submit"
                 class="bg-gray-900 rounded p-3 text-xl font-semibold text-white cursor-pointer w-full">Register</button>
+            <a href="{{ route('login') }}" class="text-center hover:underline mt-1 flex justify-center">Existing user?
+                login to your account
+                here</a>
         </div>
     </form>
 @endsection

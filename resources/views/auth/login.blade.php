@@ -30,6 +30,9 @@
         <div class="mb-5">
             <button type="submit"
                 class="bg-gray-900 rounded p-3 text-xl font-semibold text-white cursor-pointer w-full">Login</button>
+            <a href="{{ route('users.create') }}" class="text-center hover:underline mt-1 flex justify-center">New user?
+                create your account
+                here</a>
         </div>
     </form>
 @endsection
