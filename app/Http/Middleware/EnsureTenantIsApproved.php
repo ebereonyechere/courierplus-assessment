@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class EnsureTenantIsApproved
@@ -16,7 +15,7 @@ class EnsureTenantIsApproved
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->approved_at) {
+        if ($request->user()->approved_at) {
             return $next($request);
         }
 

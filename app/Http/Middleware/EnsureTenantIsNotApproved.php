@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class EnsureUserIsAdmin
+class EnsureTenantIsNotApproved
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,10 @@ class EnsureUserIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()->isAdmin()) {
+        if (!$request->user()->approved_at) {
             return $next($request);
         }
 
-        return abort(401);
+        return redirect()->route('posts.index');
     }
 }

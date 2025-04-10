@@ -6,14 +6,14 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::nonAdmins()->paginate(15);
+        $users = User::nonAdmins()->get();
 
         return view('users.index', compact('users'));
     }

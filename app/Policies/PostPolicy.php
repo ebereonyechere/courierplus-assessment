@@ -21,7 +21,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        return false;
+        return $post->user_id === $user->id;
     }
 
     /**
@@ -29,7 +29,7 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post): bool
     {
-        return false;
+        return $post->user_id === $user->id;
     }
 
     /**
@@ -45,7 +45,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post): bool
     {
-        return false;
+        return $post->user_id === $user->id;
     }
 
     /**
@@ -53,7 +53,7 @@ class PostPolicy
      */
     public function restore(User $user, Post $post): bool
     {
-        return false;
+        return $post->user_id === $user->id;
     }
 
     /**
@@ -61,13 +61,13 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post): bool
     {
-        return false;
+        return $post->user_id === $user->id;
     }
 
     /**
      * Perform pre-authorization checks.
      */
-    public function before(User $user, string $ability): bool|null
+    public function before(User $user): bool|null
     {
         if ($user->isAdmin()) {
             return true;

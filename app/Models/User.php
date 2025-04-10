@@ -6,14 +6,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -54,7 +56,7 @@ class User extends Authenticatable
      * 
      * @return boolean
      */
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->is_admin;
     }
@@ -66,5 +68,13 @@ class User extends Authenticatable
     protected function nonAdmins(Builder $query): void
     {
         $query->where('is_admin', '!=', 1);
+    }
+
+    /**
+     * Get the posts for the user.
+     */
+    public function posts(): HasMany
+    {
+        return $this->hasMany(Post::class);
     }
 }

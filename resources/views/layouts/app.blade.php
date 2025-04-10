@@ -11,10 +11,29 @@
 </head>
 
 <body class="bg-gray-50">
-    <header class="bg-gray-900 p-6 flex justify-between text-white">
-        <h1 class="text-3xl font-semibold tracking-wide">Blog App</h1>
-        <nav>
-            <a href="{{ route('posts.index') }}">Posts</a>
+    <header class="bg-gray-900 p-6 flex justify-between items-center text-white">
+        <h1 class="text-xl font-semibold tracking-wide">{{ auth()->user()->name }}
+            @if (auth()->user()->isAdmin())
+                <span class="bg-green-700 text-white font-semibold rounded p-2">Admin</span>
+            @else
+                <span class="bg-orange-700 text-white font-semibold rounded p-2">Tenant</span>
+            @endif
+        </h1>
+        <nav class="">
+            <a href="{{ route('posts.index') }}" class="hover:underline mr-4">All Posts</a>
+
+            @if (auth()->user()->isAdmin())
+                <a href="{{ route('users.index') }}" class="hover:underline mr-4">All Tenants</a>
+            @else
+                <a href="{{ route('posts.create') }}" class="hover:underline mr-4">New Post</a>
+                <a href="{{ route('api-token.index') }}" class="hover:underline mr-4">Api Token</a>
+            @endif
+            <form action="{{ route('sessions.destroy') }}" method="POST" class="inline-block">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="cursor-pointer hover:underline">Logout</button>
+            </form>
+
         </nav>
     </header>
 

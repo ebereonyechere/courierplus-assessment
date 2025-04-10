@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreSessionRequest;
 
-class SessionsController extends Controller
+class SessionController extends Controller
 {
 
     /**
@@ -35,8 +35,10 @@ class SessionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        //
+        Auth::logout();
+
+        return redirect()->route('login');
     }
 }

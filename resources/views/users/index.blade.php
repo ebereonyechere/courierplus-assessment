@@ -24,13 +24,15 @@
                     </td>
                     <td>
                         @if ($user->approved_at)
-                            <form method="POST" action="{{ route('users.ban', $user->id) }}">
+                            <form method="POST" action="{{ route('users.ban', $user->id) }}"
+                                onsubmit="return confirm('Do you really want to ban the user?');">
                                 @csrf
                                 @method('PUT')
                                 <button type="submit" class="text-red-500 cursor-pointer hover:underline">Ban?</button>
                             </form>
                         @else
-                            <form method="POST" action="{{ route('users.approve', $user->id) }}">
+                            <form method="POST" action="{{ route('users.approve', $user->id) }}"
+                                onsubmit="return confirm('Do you really want to approve the user?');">
                                 @csrf
                                 @method('PUT')
                                 <button type="submit"
